@@ -106,7 +106,6 @@ codeunit 60000 "Topic Mgmt.COL.US"
         GenTopicStartPageFooter(toFile);
     end;
 
-
     local procedure GenTopicStartPageHeader(var toFile: File; top: Record "Topics.COL.US")
     var
         able: Record "Topic Able.COL.US";
@@ -318,7 +317,7 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('</div>');
 
         toFile.Write('</div>');
-        toFile.Write('<div class="cleared"></div>');
+        toFile.Write('<div id="cleared"></div>');
         toFile.Write('</div>');
         toFile.Write('</div>');
         toFile.Write('<div class="seperator"></div>');
@@ -328,8 +327,20 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('<img class="modal-content" id="largeImage">');
         toFile.Write('<div id="caption"></div>');
         toFile.Write('</div>');
+        // sidebar
+        toFile.Write('<script>');
+        toFile.Write('                var toggler = document.getElementsByClassName("caret");');
+        toFile.Write('                var i;');
+        toFile.Write('');
+        toFile.Write('                for (i = 0; i < toggler.length; i++) {');
+        toFile.Write('toggler[i].addEventListener("click", function () {');
+        toFile.Write('this.parentElement.querySelector(".nested").classList.toggle("active");');
+        toFile.Write('this.classList.toggle("caret-down");');
+        toFile.Write('});');
+        toFile.Write('                }');
+        toFile.Write('</script>');
+        // sidebar
         toFile.Write('</body>');
-
         toFile.Write('</html>');
     end;
 
@@ -338,7 +349,7 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('<html>');
         toFile.Write('');
         toFile.Write('<head>');
-        toFile.Write('<link rel=''stylesheet'' href="../../css/main.css">');
+        toFile.Write('<link rel=''stylesheet'' href="../../../css/main.css">');
         toFile.Write('</head>');
         toFile.Write('');
         toFile.Write('<body>');
@@ -360,6 +371,11 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('<div class="body-main">');
         toFile.Write('<div class="path-bar"> <a href="../../index.html">Home</a> / <a href="../../topics.html">Learn</a></div>');
         toFile.Write('<div class="seperator"></div>');
+        toFile.Write('  <div id="wrapper">');
+        toFile.Write('    <div id="sidebar">');
+        WriteSidebar(toFile);
+        toFile.Write('</div>');
+        toFile.Write('    <div id="content">');
         toFile.Write('<div id="filterNResults">');
         toFile.Write('<!-- <div class="filter-bar">Filter</div> THIS is the filter filter bar on the left-->');
         toFile.Write('<div></div>');
@@ -368,12 +384,25 @@ codeunit 60000 "Topic Mgmt.COL.US"
 
     local procedure GenTopicsFooter(var toFile: File)
     begin
-        toFile.Write('            </div>');
-        toFile.Write('            <div class="cleared"></div>');
-        toFile.Write('</div>');
-        toFile.Write('</div>');
-        toFile.Write('<div class="seperator"></div>');
-        toFile.Write('</body>');
+        toFile.Write('          </div>');
+        toFile.Write('        <div id="cleared"></div>');
+        toFile.Write('      </div>');
+        toFile.Write('    </div>');
+        toFile.Write('  <div class="seperator"></div>');
+        // sidebar
+        toFile.Write('<script>');
+        toFile.Write('                var toggler = document.getElementsByClassName("caret");');
+        toFile.Write('                var i;');
+        toFile.Write('');
+        toFile.Write('                for (i = 0; i < toggler.length; i++) {');
+        toFile.Write('toggler[i].addEventListener("click", function () {');
+        toFile.Write('this.parentElement.querySelector(".nested").classList.toggle("active");');
+        toFile.Write('this.classList.toggle("caret-down");');
+        toFile.Write('});');
+        toFile.Write('                }');
+        toFile.Write('</script>');
+        // sidebar
+        toFile.Write('  </body>');
         toFile.Write('</html>        ');
     end;
 
@@ -382,14 +411,14 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('<html>');
         toFile.Write('');
         toFile.Write('<head>');
-        toFile.Write('<link rel=''stylesheet'' href="css/main.css">');
+        toFile.Write('<link rel=''stylesheet'' href="../css/main.css">');
         toFile.Write('</head>');
         toFile.Write('');
         toFile.Write('<body>');
         toFile.Write('<div class="body-header">');
         toFile.Write('<div>');
         toFile.Write('');
-        toFile.Write('<div class="nav-bar-left"><img src="images/columbus_logo.png" alt="columbus logo"></div>');
+        toFile.Write('<div class="nav-bar-left"><img src="/images/columbus_logo.png" alt="columbus logo"></div>');
         toFile.Write('<div class="nav-bar">');
         toFile.Write('                <!-- <div>|</div>  This is menu across the topic of the page');
         toFile.Write('                <div>menu</div>');
@@ -404,6 +433,11 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('<div class="body-main">');
         toFile.Write('<div class="path-bar"> <a href="./index.html">Home</a> / <a href="./topics.html">Learn</a></div>');
         toFile.Write('<div class="seperator"></div>');
+        toFile.Write('  <div id="wrapper">');
+        toFile.Write('    <div id="sidebar">');
+        WriteSidebar(toFile);
+        toFile.Write('</div>');
+        toFile.Write('    <div id="content">');
         toFile.Write('<div id="filterNResults">');
         toFile.Write('<!-- <div class="filter-bar">Filter</div> THIS is the filter filter bar on the left-->');
         toFile.Write('<div></div>');
@@ -413,10 +447,23 @@ codeunit 60000 "Topic Mgmt.COL.US"
     local procedure GenTopicOverFooter(var toFile: File)
     begin
         toFile.Write('            </div>');
-        toFile.Write('            <div class="cleared"></div>');
+        toFile.Write('            <div id="cleared"></div>');
         toFile.Write('</div>');
         toFile.Write('</div>');
         toFile.Write('<div class="seperator"></div>');
+        // sidebar
+        toFile.Write('<script>');
+        toFile.Write('                var toggler = document.getElementsByClassName("caret");');
+        toFile.Write('                var i;');
+        toFile.Write('');
+        toFile.Write('                for (i = 0; i < toggler.length; i++) {');
+        toFile.Write('toggler[i].addEventListener("click", function () {');
+        toFile.Write('this.parentElement.querySelector(".nested").classList.toggle("active");');
+        toFile.Write('this.classList.toggle("caret-down");');
+        toFile.Write('});');
+        toFile.Write('                }');
+        toFile.Write('</script>');
+        // sidebar
         toFile.Write('</body>');
         toFile.Write('</html>        ');
     end;
@@ -446,6 +493,11 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('    <div class="body-main">');
         toFile.Write('        <div class="path-bar"> <a href="./index.html">Home</a> / <a href="">Docs</a></div>');
         toFile.Write('        <div class="seperator"></div>');
+        toFile.Write('  <div id="wrapper">');
+        toFile.Write('    <div id="sidebar">');
+        WriteSidebar(toFile);
+        toFile.Write('</div>');
+        toFile.Write('    <div id="content">');
         toFile.Write('        <div id="filterNResults">');
         toFile.Write('            <!-- <div class="filter-bar">Filter</div> THIS is the filter filter bar on the left-->');
         toFile.Write('            <div></div>');
@@ -456,6 +508,19 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('        </div>');
         toFile.Write('    </div>');
         toFile.Write('    <div class="seperator"></div>');
+        // sidebar
+        toFile.Write('<script>');
+        toFile.Write('                var toggler = document.getElementsByClassName("caret");');
+        toFile.Write('                var i;');
+        toFile.Write('');
+        toFile.Write('                for (i = 0; i < toggler.length; i++) {');
+        toFile.Write('toggler[i].addEventListener("click", function () {');
+        toFile.Write('this.parentElement.querySelector(".nested").classList.toggle("active");');
+        toFile.Write('this.classList.toggle("caret-down");');
+        toFile.Write('});');
+        toFile.Write('                }');
+        toFile.Write('</script>');
+        // sidebar
         toFile.Write('</body>');
 
         toFile.Write('</html>');
@@ -515,7 +580,7 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile: File;
     begin
         toFile.TextMode := true;
-        toFile.Create(StrSubstNo('%1\css\login.css', baseFolder), TextEncoding::UTF8);
+        toFile.Create(StrSubstNo('%1\css\main.css', baseFolder), TextEncoding::UTF8);
 
         toFile.Write(':root {');
         toFile.Write('--header-background: rgb(23, 23, 23);');
@@ -670,8 +735,26 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('color: var(--body-fontColor);');
         toFile.Write('}');
         toFile.Write('');
+        toFile.Write('# wrapper {');
+        toFile.Write('  margin-left: 200px;');
+        toFile.Write('}');
+        toFile.Write('#cleared {');
+        toFile.Write('  clear: both;');
+        toFile.Write('}');
+        toFile.Write('');
+        toFile.Write('#sidebar {');
+        toFile.Write('  float: left;');
+        toFile.Write('  width: 200px;');
+        toFile.Write('  margin-left: -200px;');
+        toFile.Write('}');
+        toFile.Write('#content {');
+        toFile.Write('  float: right;');
+        toFile.Write('  width: 100%;');
+        toFile.Write('}');
+        toFile.Write('');
         toFile.Write('#filterNResults {');
-        toFile.Write('margin-left: 320px;');
+        toFile.Write('  margin-left: 10px; ');
+        toFile.Write('  float: left;');
         toFile.Write('}');
         toFile.Write('');
         toFile.Write('.filter-bar {');
@@ -1029,6 +1112,39 @@ codeunit 60000 "Topic Mgmt.COL.US"
         toFile.Write('}');
         toFile.Write('');
         toFile.Write('h3:hover {}');
+        // New menu stuff
+        toFile.Write('ul, #myUL {');
+        toFile.Write('list-style-type: none;');
+        toFile.Write('}   ');
+        toFile.Write('#myUL {');
+        toFile.Write('margin: 0;');
+        toFile.Write('padding: 0;');
+        toFile.Write('}    ');
+        toFile.Write('.caret {');
+        toFile.Write('cursor: pointer;');
+        toFile.Write('-webkit-user-select: none; /* Safari 3.1+ */');
+        toFile.Write('-moz-user-select: none; /* Firefox 2+ */');
+        toFile.Write('-ms-user-select: none; /* IE 10+ */');
+        toFile.Write('user-select: none;');
+        toFile.Write('}    ');
+        toFile.Write('.caret::before {');
+        toFile.Write('content: "\25B6";');
+        toFile.Write('color: rgb(255, 111, 0);');
+        toFile.Write('display: inline-block;');
+        toFile.Write('margin-right: 6px;');
+        toFile.Write('}    ');
+        toFile.Write('.caret-down::before {');
+        toFile.Write('/* -ms-transform: rotate(90deg); /* IE 9 */');
+        toFile.Write('/*-webkit-transform: rotate(90deg); /* Safari */');
+        toFile.Write('transform: rotate(90deg);  ');
+        toFile.Write('}    ');
+        toFile.Write('.nested {');
+        toFile.Write('display: none;            ');
+        toFile.Write('}    ');
+        toFile.Write('.active {');
+        toFile.Write('display: block;');
+        toFile.Write('}');
+
 
         toFile.Close();
     end;
@@ -1063,13 +1179,14 @@ codeunit 60000 "Topic Mgmt.COL.US"
                     grpFolder := StrSubstNo('%1\C-US-%2', versionFolder, groups."Code.COL.US");
                     grpDocFolder := StrSubstNo('%1\Documentation', grpFolder);
                     grpLearnFolder := StrSubstNo('%1\Learning', grpFolder);
-                    grpLearnFolder := StrSubstNo('%1\Learning\Images', grpFolder);
+                    //grpLearnFolder := StrSubstNo('%1\Learning\Images', grpFolder);
                     // MD grpFolder
                     fMgmt.ServerCreateDirectory(grpFolder);
                     // MD grpDocFolder
                     fMgmt.ServerCreateDirectory(grpDocFolder);
                     // MD grpLearnFolder
                     fMgmt.ServerCreateDirectory(grpLearnFolder);
+                    fMgmt.ServerCreateDirectory(grpLearnFolder + '\Images');
                     topic.SetRange("Group Code.COL.US", groups."Code.COL.US");
                     topic.SetRange("Group Version.COL.US", groups."Version.COL.US");
                     topic.SetRange("Type.COL.US", topic."Type.COL.US"::Documentation);
@@ -1105,4 +1222,35 @@ codeunit 60000 "Topic Mgmt.COL.US"
             end;
         end;
     end;
+
+
+    local procedure WriteSidebar(var toFile: File)
+    var
+        prevFilter: Text;
+        grp: Record "Topic Group.COL.US";
+        top: Record "Topics.COL.US";
+    begin
+        if grp.FindSet() then begin
+            toFile.Write('<ul id="myUL">');
+            toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/topics.html">Learning</a></span>', grp."Version.COL.US"));
+            toFile.Write('  <ul class="nested">');
+            repeat
+                top.SetRange("Group Code.COL.US", grp."Code.COL.US");
+                top.SetRange("Group Version.COL.US", grp."Version.COL.US");
+                if top.FindSet() then begin
+                    toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/%2/Learning/topics.html">%3</a></span>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
+                    toFile.Write('    <ul class="nested">');
+                    repeat
+                        toFile.Write(StrSubstNo('<li><a href="/%1/%2/Learning/%3/topic_overview.html">%4</a></li>', grp."Version.COL.US", grp."Code.COL.US", top."Code.COL.US", top."Name.COL.US"));
+                    until top.Next() = 0;
+                    toFile.Write('    </ul>');
+                end else
+                    toFile.Write(StrSubstNo('  <li><a href="/%1/%2/Learning/topics.html">%3</a>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
+                toFile.Write('  </li>');
+            until grp.Next() = 0;
+            toFile.Write('  </ul>');
+            toFile.Write('</ul">');
+        end;
+    end;
+
 }

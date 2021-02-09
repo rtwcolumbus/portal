@@ -58,14 +58,14 @@ page 60005 "Sub Detail.COL.US"
                         WriteTxt();
                     end;
                 }
-                usercontrol(html; HTML)
-                {
-                    ApplicationArea = All;
-                    trigger ControlReady()
-                    begin
-                        CurrPage.html.Render('<label>Search for <i>Users</i>, open the page and click <i>New</i>. Populate the fields:</label>');
-                    end;
-                }
+                // usercontrol(html; HTML)
+                // {
+                //     ApplicationArea = All;
+                //     trigger ControlReady()
+                //     begin
+                //         CurrPage.html.Render('<label>Search for <i>Users</i>, open the page and click <i>New</i>. Populate the fields:</label>');
+                //     end;
+                // }
             }
         }
     }
