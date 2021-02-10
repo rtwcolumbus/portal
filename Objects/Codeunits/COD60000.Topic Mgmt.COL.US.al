@@ -1230,27 +1230,28 @@ codeunit 60000 "Topic Mgmt.COL.US"
         grp: Record "Topic Group.COL.US";
         top: Record "Topics.COL.US";
     begin
-        if grp.FindSet() then begin
-            toFile.Write('<ul id="myUL">');
-            toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/topics.html">Learning</a></span>', grp."Version.COL.US"));
-            toFile.Write('  <ul class="nested">');
-            repeat
-                top.SetRange("Group Code.COL.US", grp."Code.COL.US");
-                top.SetRange("Group Version.COL.US", grp."Version.COL.US");
-                if top.FindSet() then begin
-                    toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/%2/Learning/topics.html">%3</a></span>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
-                    toFile.Write('    <ul class="nested">');
-                    repeat
-                        toFile.Write(StrSubstNo('<li><a href="/%1/%2/Learning/%3/topic_overview.html">%4</a></li>', grp."Version.COL.US", grp."Code.COL.US", top."Code.COL.US", top."Name.COL.US"));
-                    until top.Next() = 0;
-                    toFile.Write('    </ul>');
-                end else
-                    toFile.Write(StrSubstNo('  <li><a href="/%1/%2/Learning/topics.html">%3</a>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
-                toFile.Write('  </li>');
-            until grp.Next() = 0;
-            toFile.Write('  </ul>');
-            toFile.Write('</ul">');
-        end;
+        // turned off as i broke something so it doesnt work any more plus dont need
+        //     if grp.FindSet() then begin
+        //         toFile.Write('<ul id="myUL">');
+        //         toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/topics.html">Learning</a></span>', grp."Version.COL.US"));
+        //         toFile.Write('  <ul class="nested">');
+        //         repeat
+        //             top.SetRange("Group Code.COL.US", grp."Code.COL.US");
+        //             top.SetRange("Group Version.COL.US", grp."Version.COL.US");
+        //             if top.FindSet() then begin
+        //                 toFile.Write(StrSubstNo('  <li><span class="caret"><a href="/%1/%2/Learning/topics.html">%3</a></span>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
+        //                 toFile.Write('    <ul class="nested">');
+        //                 repeat
+        //                     toFile.Write(StrSubstNo('<li><a href="/%1/%2/Learning/%3/topic_overview.html">%4</a></li>', grp."Version.COL.US", grp."Code.COL.US", top."Code.COL.US", top."Name.COL.US"));
+        //                 until top.Next() = 0;
+        //                 toFile.Write('    </ul>');
+        //             end else
+        //                 toFile.Write(StrSubstNo('  <li><a href="/%1/%2/Learning/topics.html">%3</a>', grp."Version.COL.US", grp."Code.COL.US", grp."Name.COL.US"));
+        //             toFile.Write('  </li>');
+        //         until grp.Next() = 0;
+        //         toFile.Write('  </ul>');
+        //         toFile.Write('</ul">');
+        //     end;
     end;
 
 }
